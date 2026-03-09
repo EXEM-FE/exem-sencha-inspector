@@ -1,0 +1,72 @@
+name: Release Artifact
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build extension
+        run: pnpm build
+
+      - name: Build zip artifact
+        run: pnpm zip
+
+      - name: Resolve zip path
+        id: zip
+        shell: bash
+        run: |
+          mapfile -t ZIP_FILES < <(find .output -maxdepth 1 -type f -name '*-chrome.zip' | sort)
+          ZIP_COUNT="${#ZIP_FILES[@]}"
+
+          if [[ "$ZIP_COUNT" -eq 0 ]]; then
+            echo "No chrome zip artifact found in .output"
+            exit 1
+          fi
+
+          if [[ "$ZIP_COUNT" -gt 1 ]]; then
+            printf 'Expected exactly one chrome zip artifact, found %s:\n' "$ZIP_COUNT"
+            printf ' - %s\n' "${ZIP_FILES[@]}"
+            exit 1
+          fi
+
+          ZIP_PATH="${ZIP_FILES[0]}"
+          echo "zip_path=$ZIP_PATH" >> "$GITHUB_OUTPUT"
+          echo "zip_name=$(basename "$ZIP_PATH")" >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-zip
+          path: ${{ steps.zip.outputs.zip_path }}
+          if-no-files-found: error
+
+      - name: Attach asset to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.zip.outputs.zip_path }}
