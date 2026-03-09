@@ -39,6 +39,9 @@ Exem Sencha Inspector는 Chrome DevTools 안에서 Sencha/ExtJS 기반 화면을
 nvm use
 pnpm install
 pnpm dev
+pnpm test
+pnpm test:run
+pnpm coverage
 pnpm lint
 pnpm typecheck
 pnpm check
@@ -47,6 +50,8 @@ pnpm zip
 ```
 
 ZIP artifact는 `.output/` 아래에 생성된다.
+
+`pnpm check`는 `lint + typecheck + test:run`을 순서대로 실행한다.
 
 ## Load In Chrome
 

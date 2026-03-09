@@ -13,9 +13,12 @@
     "dev": "wxt",
     "build": "wxt build",
     "zip": "wxt zip",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
-    "check": "pnpm lint && pnpm typecheck",
+    "check": "pnpm lint && pnpm typecheck && pnpm test:run",
     "postinstall": "wxt prepare"
   },
   "dependencies": {
@@ -23,11 +26,19 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jsdom": "^28.0.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.0.18",
     "@wxt-dev/module-react": "^1.1.5",
-    "@biomejs/biome": "^2.4.6",
+    "jsdom": "^28.1.0",
     "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
     "wxt": "^0.20.18"
   }
 }
