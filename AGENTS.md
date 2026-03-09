@@ -24,6 +24,13 @@
 - FSD import 규칙을 따른다. 상위 레이어는 하위 레이어만 참조하고, 같은 레이어 slice 간 직접 import는 피하며, 외부 노출은 `index.ts` public API를 우선한다.
 - deprecated `processes` 레이어는 도입하지 않는다.
 
+## Design System Rules
+
+- shadcn vendored UI는 `src/shared/ui`에만 둔다.
+- 전역 색/spacing/radius/shadow 토큰은 `src/app/styles/globals.css` 한 곳에서만 관리한다.
+- feature/widget/page는 semantic token class만 사용하고 raw hex를 직접 박지 않는다.
+- DevTools UI는 dark-first, dense, operator-console 톤을 기본으로 하고 상태 표현은 semantic variant로 통일한다.
+
 ## Extension Guardrails
 
 - `Selected Frame`는 component tree, property inspector, inspect mode, monitoring scope의 단일 source of truth여야 한다.

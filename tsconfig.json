@@ -2,7 +2,16 @@
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "baseUrl": ".",
     "jsx": "react-jsx",
+    "paths": {
+      "@/app/*": ["./src/app/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/shared/ui/*": ["./src/shared/ui/*"],
+      "@/shared/lib/*": ["./src/shared/lib/*"],
+      "@/shared/hooks/*": ["./src/shared/hooks/*"],
+      "@/*": ["./*"]
+    },
     "strict": true
   }
 }

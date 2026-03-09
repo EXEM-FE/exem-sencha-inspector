@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-ui-sans);
+  --font-mono: var(--font-ui-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  color-scheme: light;
+  --font-ui-sans:
+    "SF Pro Text", "SF Pro Display", "Segoe UI", "Noto Sans", system-ui,
+    -apple-system, sans-serif;
+  --font-ui-mono:
+    "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --background: #f5f7fb;
+  --foreground: #1a2333;
+  --card: #ffffff;
+  --card-foreground: #111927;
+  --popover: #ffffff;
+  --popover-foreground: #111927;
+  --primary: #3a8ef9;
+  --primary-foreground: #f7fbff;
+  --secondary: #e8eef8;
+  --secondary-foreground: #142033;
+  --muted: #eef2f8;
+  --muted-foreground: #5d6b83;
+  --accent: #dfeaff;
+  --accent-foreground: #1d2d49;
+  --destructive: #d94848;
+  --destructive-foreground: #fff6f6;
+  --border: #d6deea;
+  --input: #d9e0eb;
+  --ring: #70b4ff;
+  --success: #2f9a5f;
+  --success-foreground: #f3fff7;
+  --warning: #cc7a17;
+  --warning-foreground: #fff7ed;
+  --chart-1: #3a8ef9;
+  --chart-2: #15aabf;
+  --chart-3: #7a63f5;
+  --chart-4: #b785ff;
+  --chart-5: #f8a838;
+  --radius: 0.58rem;
+  --sidebar: #f8fafd;
+  --sidebar-foreground: #1c2738;
+  --sidebar-primary: #3a8ef9;
+  --sidebar-primary-foreground: #f7fbff;
+  --sidebar-accent: #eaf0fa;
+  --sidebar-accent-foreground: #1d2d49;
+  --sidebar-border: #d7e0ed;
+  --sidebar-ring: #70b4ff;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #0e1117;
+  --foreground: #e6ebf5;
+  --card: #151b24;
+  --card-foreground: #e6ebf5;
+  --popover: #151b24;
+  --popover-foreground: #e6ebf5;
+  --primary: #4ea1ff;
+  --primary-foreground: #061325;
+  --secondary: #1d2634;
+  --secondary-foreground: #dce5f5;
+  --muted: #1b232f;
+  --muted-foreground: #9cabbe;
+  --accent: #223247;
+  --accent-foreground: #d8e7ff;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff6f6;
+  --border: #263041;
+  --input: #263041;
+  --ring: #8ec5ff;
+  --success: #22c55e;
+  --success-foreground: #06160d;
+  --warning: #f59e0b;
+  --warning-foreground: #1f1504;
+  --chart-1: #4ea1ff;
+  --chart-2: #22c55e;
+  --chart-3: #8c7bff;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: #121822;
+  --sidebar-foreground: #d8e2f3;
+  --sidebar-primary: #4ea1ff;
+  --sidebar-primary-foreground: #061325;
+  --sidebar-accent: #1f2b3a;
+  --sidebar-accent-foreground: #dce8ff;
+  --sidebar-border: #263041;
+  --sidebar-ring: #8ec5ff;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply m-0 bg-background font-sans text-foreground antialiased;
+    background-image: radial-gradient(
+      120% 120% at 100% 0%,
+      color-mix(in oklab, var(--background), #4ea1ff 14%) 0%,
+      var(--background) 58%
+    );
+  }
+}

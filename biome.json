@@ -2,7 +2,16 @@
   "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.output", "!.wxt", "!coverage"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.output",
+      "!.wxt",
+      "!coverage",
+      "!src/app/styles/globals.css",
+      "!src/shared/hooks/use-mobile.ts",
+      "!src/shared/ui/components/ui"
+    ]
   },
   "formatter": {
     "enabled": true,
